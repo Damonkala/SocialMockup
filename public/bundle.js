@@ -53,27 +53,6 @@ angular.module('socialMockup')
 'use strict';
 
 angular.module('socialMockup')
-
-.controller('registerCtrl', function($scope, $state, UserService){
-	$scope.submit = function(user){
-		console.log(user)
-		if(user.password !== user.password2){
-			alert('Passwords do not match');
-			return;
-		}
-		UserService.register(user)
-		.then(function(data){
-			alert('You have sucessfully registered');
-				$state.go('login');
-		}, function(err){
-			console.log(err);
-		});
-	}
-});
-
-'use strict';
-
-angular.module('socialMockup')
 .controller('loginCtrl', function($scope, $state, $rootScope, UserService, jwtHelper, $cookies){
 	$scope.submit = function(user){
 		UserService.login(user)
@@ -100,6 +79,27 @@ angular.module('socialMockup')
 
 		}, function(err) {
 			console.error(err);
+		});
+	}
+});
+
+'use strict';
+
+angular.module('socialMockup')
+
+.controller('registerCtrl', function($scope, $state, UserService){
+	$scope.submit = function(user){
+		console.log(user)
+		if(user.password !== user.password2){
+			alert('Passwords do not match');
+			return;
+		}
+		UserService.register(user)
+		.then(function(data){
+			alert('You have sucessfully registered');
+				$state.go('login');
+		}, function(err){
+			console.log(err);
 		});
 	}
 });
