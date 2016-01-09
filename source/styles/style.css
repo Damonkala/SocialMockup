@@ -1,6 +1,7 @@
 #userImage {
   max-height: 50vh;
   max-width: 50vh;
+  display: inline-block;
 }
 
 .userThumbnail {
@@ -10,8 +11,15 @@
 }
 
 #profile {
+  /*text-align: center;*/
+  /*border: 5px solid blue;*/
+  /*font-size: 1px;*/
+}
+#userTitle{
   text-align: center;
-  border: 5px, solid-blue;
+}
+#userInfo{
+  font-size: 30px;
 }
 
 #favoriteImage {
