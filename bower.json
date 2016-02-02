@@ -4,22 +4,24 @@
   "main": "app.js",
   "authors": [
     "Damon Kalaboukis <damonkala@yahoo.com>",
-    "Rich Gautereaux <RichGautereaux@gmail.com>",
-    "Andrew Sturick <Andrew.Sturick@gmail.com>",
-    "Rachel Slater"
+    "Rachel Slater",
+    "Jillian Fetter"
   ],
   "license": "ISC",
   "moduleType": [],
+  "resolutions":{"angular" : "1.4.8"},
   "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+
+    "./assets",
     "test",
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.8",
+    "angular": "~1.4.9",
     "angular-ui-router": "~0.2.15",
     "bootstrap": "~3.3.6",
     "angular-cookies": "~1.4.8",
@@ -29,7 +31,10 @@
     "angular-base64-upload": "~0.1.13",
     "sweetalert": "~1.1.3",
     "ngSweetAlert": "angular-sweetalert#~1.1.0",
-    "angular-sweetalert": "latest"
+    "angular-sweetalert": "latest",
+    "firebase": "~2.3.2",
+    "angularfire": "~1.1.3",
+    "bootswatch": "~3.3.6"
   },
   "resolutions": {
     "angular": "1.4.8"

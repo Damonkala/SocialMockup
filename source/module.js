@@ -1,11 +1,11 @@
 'use strict';
 
-var app = angular.module('socialMockup', ['ui.router', 'angular-jwt', 'ngCookies','naif.base64', "base64"])
-
+var app = angular.module('cardsAgainstHumanity', ['ui.router', 'angular-jwt', 'ngCookies','naif.base64', "base64", "firebase"])
 
 app.constant('ENV', {
   API_URL: 'http://localhost:3000'
 });
+
 
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
@@ -15,11 +15,11 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider){
 		.state('home', {url: '/', templateUrl: 'views/home/home.html', controller: 'homeCtrl'})
 		.state('login', {url: '/login', templateUrl: 'views/login/login.html', controller: 'loginCtrl'})
 		.state('register', {url: '/register', templateUrl: 'views/register/register.html', controller: 'registerCtrl'})
-		.state('usersList', {url: '/userslist', templateUrl: 'views/user/usersList/usersList.html', controller: 'usersListCtrl'})
-		.state('userPage', {url: '/userpage/{username}', templateUrl: 'views/user/userPage/userPage.html', controller: 'userPageCtrl'})
+		.state('game', {url: '/game', templateUrl: 'views/game/game.html', controller: 'gameMasterCtrl'})
+		.state('userPage', {url: '/userpage/{username}', templateUrl: 'views/userPage/userPage.html', controller: 'userPageCtrl'})
 })
 
-app.controller('MasterController', function(UserService, $cookies, jwtHelper, $scope, $state, $rootScope){
+app.controller('MasterController', function(UserService, $cookies, jwtHelper, $scope, $state, $rootScope, GameService){
   var cookies = $cookies.get('token');
   var username;
   if(cookies){
@@ -30,7 +30,7 @@ app.controller('MasterController', function(UserService, $cookies, jwtHelper, $s
   .then(function(res , err){
     console.log(res.data)
     if (res.data !== "authRequired"){
-    $state.go('usersList');
+      // $state.go('userPage', {"username": res.data.username})
     $scope.isLoggedIn = true;
     console.log("LOGGED IN!")
   } else {
@@ -61,7 +61,9 @@ app.controller('MasterController', function(UserService, $cookies, jwtHelper, $s
   })
 
   $scope.logout = function(){
+    GameService.removePlayer();
     $cookies.remove('token');
+    if (localStorage.playing){localStorage.removeItem('player')}
     $state.go('login')
     $scope.isLoggedIn = false;
   }
